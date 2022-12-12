@@ -1,20 +1,19 @@
-import { useSelector, useDispatch} from "react-redux";
+import { Component } from "react";
+import { useSelector, useDispatch, connect } from "react-redux";
 
 import classes from "./Counter.module.css";
 
 const Counter = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const counter = useSelector((state) => state.counter);
 
-
   const incrementHandler = () => {
-    dispatch({type: 'Increment'})
-  }
-
+    dispatch({ type: "Increment" });
+  };
 
   const decrementHandler = () => {
-    dispatch({type: 'Decrement'})
-  }
+    dispatch({ type: "Decrement" });
+  };
 
   const toggleCounterHandler = () => {};
 
@@ -31,4 +30,45 @@ const Counter = () => {
   );
 };
 
-export default Counter;
+export default Counter
+
+// class Counter extends Component {
+//   incrementHandler() {
+//     this.props.increment();
+//   }
+//   decrementHandler() {
+//     this.props.decrement();
+//   }
+
+//   toggleCounterHandler() {}
+
+//   render() {
+//     return (
+//       <main className={classes.counter}>
+//         <h1>Redux Counter</h1>
+//         <div className={classes.value}>{this.props.counter}</div>
+//         <div>
+//           <button onClick={this.decrementHandler.bind(this)}>Azalt</button>
+//           <button onClick={this.incrementHandler.bind(this)}>Artır</button>
+//         </div>
+//         <button onClick={this.toggleCounterHandler}>Toggle Counter</button>
+//       </main>
+//     );
+//   }
+// }
+
+// // Bununla aynı işlevi görür ama class connect için böyle yapmak gerekiyor
+// // const counter = useSelector((state) => state.counter)
+// const mapStateToProps = (state) => {
+//   return {
+//     counter: state.counter,
+//   };
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     increment: () => dispatch({ type: "Increment" }),
+//     decrement: () => dispatch({ type: "Decrement" }),
+//   };
+// };
+// export default connect(mapStateToProps, mapDispatchToProps)(Counter);
