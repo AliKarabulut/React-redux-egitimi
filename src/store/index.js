@@ -1,23 +1,35 @@
-import {createStore} from 'redux'
+import { createStore } from "redux";
 
-const counterReducer = (state = {counter:0},action) =>{
-    if (action.type === 'Increment'){
-        return {
-            counter: state.counter + 1
-        }
-    }
-    if (action.type === 'Decrement') {
-        return {
-            counter: state.counter -1
-        }
-        
-    }
+const counterReducer = (state = { counter: 0 }, action) => {
+  if (action.type === "Increment") {
+    return {
+      counter: state.counter + 1,
+    };
+  }
+  // Böyle yapmayacağız çünkü beklenene artış genelde sabit olmaz
+  // Kullanıcı örneğin istediği kadar aynı ürünü sepete ekler
+  // Bu yüzden dummy kod yazmıyoruz
+  // if (action.type === 'Increaseby5'){
+  //     return {
+  //         counter: state.counter + 5
+  //     }
+  // }
 
-    return state
+  if (action.type === "Increase") {
+    return {
+      counter: state.counter + action.amount,
+    };
+  }
 
-}
+  if (action.type === "Decrement") {
+    return {
+      counter: state.counter - 1,
+    };
+  }
 
-const store = createStore(counterReducer)
+  return state;
+};
 
-export default store
+const store = createStore(counterReducer);
 
+export default store;
