@@ -1,9 +1,13 @@
 import { createStore } from "redux";
 
-const counterReducer = (state = { counter: 0 }, action) => {
+const initialstate = { counter: 0, showCounter: true };
+
+const counterReducer = (state = initialstate, action) => {
   if (action.type === "Increment") {
     return {
       counter: state.counter + 1,
+      showCounter: state.showCounter
+
     };
   }
   // Böyle yapmayacağız çünkü beklenene artış genelde sabit olmaz
@@ -18,14 +22,25 @@ const counterReducer = (state = { counter: 0 }, action) => {
   if (action.type === "Increase") {
     return {
       counter: state.counter + action.amount,
+      //Yinede showcounteri eklemen lazım değiştirmesende çünkü son görünümü veriyoruz
+      showCounter: state.showCounter
     };
   }
 
   if (action.type === "Decrement") {
     return {
       counter: state.counter - 1,
+      showCounter: state.showCounter
     };
   }
+
+  if (action.type === "Toggle") {
+    return {
+        showCounter: !state.showCounter,
+        counter: state.counter
+    };
+  }
+
 
   return state;
 };
