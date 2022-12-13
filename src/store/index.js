@@ -1,30 +1,46 @@
 // import { createStore } from "redux";
-import {createSlice, configureStore} from '@reduxjs/toolkit'
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialstate = { counter: 0, showCounter: true };
+const initialCounterState = { counter: 0, showCounter: true };
 
 const counterSlice = createSlice({
-  name: 'counter',
-  initialState: initialstate,
+  name: "counter",
+  initialState: initialCounterState,
   //modern js de sadece initialstate yazsan da yeter js kendi üstteki hale genişletir
   reducers: {
     increment(state) {
-      state.counter++
+      state.counter++;
     },
     decrement(state) {
-      state.counter--
+      state.counter--;
     },
     increase(state, action) {
       //burda amount değeri aldığımız için action da olmalı ama ilk ikisinde
       //action kullanmadığımız için gerek yoktu
-      state.counter = state.counter + action.payload
+      state.counter = state.counter + action.payload;
     },
     toggleCounter(state) {
-      state.showCounter = !state.showCounter
-    }
+      state.showCounter = !state.showCounter;
+    },
+  },
+});
 
-  }
-})
+const initialAuthState = {
+  isAuthenticated: false,
+};
+const authSlice = createSlice({
+  name: "authentication",
+  initialState: initialAuthState,
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+
+    logout(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
 
 // const counterReducer = (state = initialstate, action) => {
 //   if (action.type === "Increment") {
@@ -49,7 +65,7 @@ const counterSlice = createSlice({
 //     return {
 //       counter: state.counter + action.amount,
 //       //Yinede showcounteri eklemen lazım değiştirmesende çünkü son görünümü veriyoruz
-//       showCounter: state.showCounter //bunu eklemezsen hang ttona basarsan bas sayaç kapatılır 
+//       showCounter: state.showCounter //bunu eklemezsen hang ttona basarsan bas sayaç kapatılır
 //       // çünkü değer tanımsız olur ve bu false olarak değerlendirilir
 //       // böyle olmasının sebebi eski statenin üzerine yazıyor olmamız her şey yeni yazılan olur eski bilgiler gider
 //     };
@@ -69,17 +85,21 @@ const counterSlice = createSlice({
 //     };
 //   }
 
-
 //   return state;
 // };
 
+// Bu tekli
+// const store = configureStore({
+//   // tek bi reducer da böyle yazılır ama birden çoksa reducer: counterSlice.reducer
+//   // ama burda kullanmayacaz çünkü zaten bi tane reducerımız var reducer: { counter: counterSlice.reducer}
+//   reducer: counterSlice.reducer
+// });
 
-
+//Bu çoklu
 const store = configureStore({
-  // tek bi reducer da böyle yazılır ama birden çoksa reducer: counterSlice.reducer 
-  // ama burda kullanmayacaz çünkü zaten bi tane reducerımız var reducer: { counter: counterSlice.reducer}
-  reducer: counterSlice.reducer
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
 });
 
-export const counterActions = counterSlice.actions
+export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions
 export default store;
