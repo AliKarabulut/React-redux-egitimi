@@ -17,7 +17,7 @@ const counterSlice = createSlice({
     increase(state, action) {
       //burda amount değeri aldığımız için action da olmalı ama ilk ikisinde
       //action kullanmadığımız için gerek yoktu
-      state.counter = state.counter + action.amount
+      state.counter = state.counter + action.payload
     },
     toggleCounter(state) {
       state.showCounter = !state.showCounter
@@ -73,11 +73,13 @@ const counterSlice = createSlice({
 //   return state;
 // };
 
+
+
 const store = configureStore({
   // tek bi reducer da böyle yazılır ama birden çoksa reducer: counterSlice.reducer 
   // ama burda kullanmayacaz çünkü zaten bi tane reducerımız var reducer: { counter: counterSlice.reducer}
   reducer: counterSlice.reducer
 });
 
-
+export const counterActions = counterSlice.actions
 export default store;
