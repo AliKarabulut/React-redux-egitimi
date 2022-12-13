@@ -23,7 +23,9 @@ const counterReducer = (state = initialstate, action) => {
     return {
       counter: state.counter + action.amount,
       //Yinede showcounteri eklemen lazım değiştirmesende çünkü son görünümü veriyoruz
-      showCounter: state.showCounter
+      showCounter: state.showCounter //bunu eklemezsen hang ttona basarsan bas sayaç kapatılır 
+      // çünkü değer tanımsız olur ve bu false olarak değerlendirilir
+      // böyle olmasının sebebi eski statenin üzerine yazıyor olmamız her şey yeni yazılan olur eski bilgiler gider
     };
   }
 
