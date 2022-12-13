@@ -1,9 +1,35 @@
 import { createStore } from "redux";
+import {createSlice} from '@reduxjs/toolkit'
 
 const initialstate = { counter: 0, showCounter: true };
 
+createSlice({
+  name: 'counter',
+  initialState: initialstate,
+  //modern js de sadece initialstate yazsan da yeter js kendi üstteki hale genişletir
+  reducers: {
+    increment(state) {
+      state.counter++
+    },
+    decrement(state) {
+      state.counter--
+    },
+    increase(state, action) {
+      //burda amount değeri aldığımız için action da olmalı ama ilk ikisinde
+      //action kullanmadığımız için gerek yoktu
+      state.counter = state.counter + action.amount
+    },
+    toggleCounter(state) {
+      state.showCounter = !state.showCounter
+    }
+
+  }
+})
+
 const counterReducer = (state = initialstate, action) => {
   if (action.type === "Increment") {
+    //state.counter++ burda manipüle edemezsin redux sıkıntı çıkartır
+    //ilerleyen zamanlarda ama toolkit ile yapabilirsin o izin verir
     return {
       counter: state.counter + 1,
       showCounter: state.showCounter
