@@ -1,9 +1,9 @@
 ### Maximilian Schwarzmüllerden aldğım React redux eğitimini içerir.
 ---
-## React Redux & Redux Toolkit
+#### React Redux & Redux Toolkit
 --- 
 ### İçindekiler
-#### - useDispatch()
+#### - useDispatch
 #### - useSelector
 #### - connect
 #### - createSlice
